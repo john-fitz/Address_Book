@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    {% for contact in all_contacts %}
+        <li>{{ contact.first_name }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}
