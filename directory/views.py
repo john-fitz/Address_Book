@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.http import HttpResponseRedirect
 
 from .models import Contact
@@ -9,6 +10,11 @@ from .forms import ContactForm
 class ContactList(ListView):
     model = Contact
     context_object_name = 'all_contacts'
+
+class ContactView(DetailView):
+    model = Contact
+    context_object_name = 'contact'
+
 
 def contact_req(request):
     submitted = False
