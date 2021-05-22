@@ -22,14 +22,14 @@ def contact_req(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/contact/?submitted=True')
+            return HttpResponseRedirect('/?submitted=True')
         
-        else:
-            form = ContactForm()
-            if 'submitted' in request.GET:
-                submitted = True
+    else:
+        form = ContactForm()
+        if 'submitted' in request.GET:
+            submitted = True
     
     # really not sure about this part - should redirect to detailed view of contact
-    return render(request, 'directory/contact.html', {'form': form, 'contact_info': Contact.objects.all(), 'submitted': submitted})
+    return render(request, 'directory/contact.html', {'form': form})
 
 
