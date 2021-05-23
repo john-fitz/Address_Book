@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
+from django.views.generic import DetailView, ListView, CreateView
 from django.http import HttpResponseRedirect
 
 from .models import Contact
@@ -16,20 +15,23 @@ class ContactView(DetailView):
     context_object_name = 'contact'
 
 
-def contact_req(request):
-    submitted = False
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/?submitted=True')
+# def contact_req(request):
+#     submitted = False
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect('/?submitted=True')
         
-    else:
-        form = ContactForm()
-        if 'submitted' in request.GET:
-            submitted = True
+#     else:
+#         form = ContactForm()
+#         if 'submitted' in request.GET:
+#             submitted = True
     
-    # really not sure about this part - should redirect to detailed view of contact
-    return render(request, 'directory/contact.html', {'form': form})
+#     # really not sure about this part - should redirect to detailed view of contact
+#     return render(request, 'directory/contact.html', {'form': form})
 
-
+class AddContactView(CreateView):
+    model = Contact
+    form_class = ContactForm
+    template_name = 'directory/add_contact.html'

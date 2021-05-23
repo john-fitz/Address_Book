@@ -20,15 +20,39 @@
                     {{ form.last_name|as_crispy_field }}
                   </div>
                 </div>
-                {{ form.email|as_crispy_field }}
+                <!-- {{ form.email|as_crispy_field }} -->
                 <!-- <label for="example-date-input" class="col-2 col-form-label">Date</label> -->
                 <!-- {{ form.first_name.label }} -->
                 {{ form.birthday|as_crispy_field }}
                 {{ form.notes|as_crispy_field }}
             <button type="submit" class="btn btn-success">Save Contact</button>
         </form>
-    
+
+        <!-- <div class="form-control">
+            <form method="post" novalidate>
+                <div class="row">
+                    <div class="col">
+                        <div class="first_name">
+
+                        </div>
+                    <input type="text" class="form-control" placeholder="First name">
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+            </form>
+            
+        </div> -->
+        
     {% endif %}
 
 
 {% endblock content %}
+
+<script>
+    $(function () {
+        $("#datepicker1").datepicker({
+            format: 'DD/MM/YYYY',
+        });
+}); 
+</script>
