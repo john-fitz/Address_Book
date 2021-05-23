@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView, CreateView
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 from .models import Contact
 from .forms import ContactForm
@@ -35,3 +36,7 @@ class AddContactView(CreateView):
     model = Contact
     form_class = ContactForm
     template_name = 'directory/add_contact.html'
+
+    def form_valid(self, form):
+        employee = form.save()  
+        return redirect('show-contacts')

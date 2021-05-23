@@ -4,55 +4,30 @@
 {% block title %}Add Contact{% endblock title %}
 
 {% block content %}
-    {% if submitted %}
-        <p class="success">
-            Contact successfully added!
-        </p>
-
-    {% else %}
-        <form method="post" novalidate>
-            {% csrf_token %}
-                <div class="row">
-                  <div class="col-6">
-                    {{ form.first_name|as_crispy_field }}
-                  </div>
-                  <div class="col-6">
-                    {{ form.last_name|as_crispy_field }}
-                  </div>
+    <form method="post" novalidate>
+        {% csrf_token %}
+            <div class="row">
+                <div class="col-5">
+                {{ form.first_name|as_crispy_field }}
                 </div>
-                <!-- {{ form.email|as_crispy_field }} -->
-                <!-- <label for="example-date-input" class="col-2 col-form-label">Date</label> -->
-                <!-- {{ form.first_name.label }} -->
-                {{ form.birthday|as_crispy_field }}
-                {{ form.notes|as_crispy_field }}
-            <button type="submit" class="btn btn-success">Save Contact</button>
-        </form>
-
-        <!-- <div class="form-control">
-            <form method="post" novalidate>
-                <div class="row">
-                    <div class="col">
-                        <div class="first_name">
-
-                        </div>
-                    <input type="text" class="form-control" placeholder="First name">
-                    </div>
-                    <div class="col">
-                    </div>
+                <div class="col-5">
+                {{ form.last_name|as_crispy_field }}
                 </div>
-            </form>
-            
-        </div> -->
-        
-    {% endif %}
+                <div class="col-2">
+                    {{ form.birthday|as_crispy_field }}
+                </div>
+            </div>
 
+            {{ form.notes|as_crispy_field }}
+        <button type="submit" class="btn btn-success">Save Contact</button>
+    </form>
 
 {% endblock content %}
 
-<script>
+<!-- <script>
     $(function () {
         $("#datepicker1").datepicker({
             format: 'DD/MM/YYYY',
         });
 }); 
-</script>
+</script> -->

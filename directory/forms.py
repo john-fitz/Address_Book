@@ -1,12 +1,12 @@
 from django import forms
-from django.forms import ModelForm
 from .models import Contact
+from crispy_forms.helper import FormHelper
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
 
-class ContactForm(ModelForm):
+class ContactForm(forms.ModelForm):
     required_css_class = 'required'
     class Meta:
         model = Contact
