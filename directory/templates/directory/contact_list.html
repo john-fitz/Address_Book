@@ -1,9 +1,21 @@
 {% extends "base.html" %}
+{% load static   %}
+
+<link href="{% static 'css/contact_list.css' %}" rel="stylesheet" />
 
 {% block content %}
-<ul>
-    {% for contact in all_contacts %}
-        <li>{{ contact.first_name }}</li>
-    {% endfor %}
-</ul>
+<div class="row">
+    <div class="col-2">
+        <a class="btn btn-primary" href="{% url 'add-contact' %}" role="button">Add Contact</a>
+    </div>
+
+    <div class="col-6">
+        {% for contact in all_contacts %}
+            <div class="contactrow {% cycle '' 'altrow' %}">
+                <a href="{% url 'contact-detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock content %}

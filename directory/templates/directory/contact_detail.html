@@ -3,5 +3,17 @@
 {% block title %}Contact Detail{% endblock title %}
 
 {% block content %}
-{{ contact.first_name }}
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-primary" href="{% url 'update-contact' contact.id %}" role="button">Edit Contact</a>
+        </div>
+
+        <div class="col-6">
+            <p><strong>First name &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.first_name }}</p> 
+            <p><strong>Last name &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.last_name }}</p> 
+            <p><strong>Birthday &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.birthday}}</p>
+            <p><strong>Notes &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.notes}}</p> 
+        </div>
+    </div>
+    
 {% endblock content %}

@@ -18,6 +18,6 @@ class ContactForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'birthday': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+            'birthday': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
             'notes': forms.Textarea(attrs={'class': 'form-control'}),
         }
