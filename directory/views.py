@@ -32,9 +32,13 @@ class UpdateContactView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         contact = form.save()  
         return redirect('contact-detail', pk=contact.pk)
 
-class ContactView(DetailView):
+class ContactView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Contact
     context_object_name = 'contact'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.username == self.request.user
 
 class AddContactView(CreateView):
     model = Contact
