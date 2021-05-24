@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load static   %}
 
-<link href="{% static 'css/contact_list.css' %}" rel="stylesheet" />
+{% block extra_head %}
+    <link href="{% static 'css/contact_list.css' %}" rel="stylesheet" />
+{% endblock %}
+
 
 {% block content %}
 <div class="row">

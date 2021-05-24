@@ -1,0 +1,22 @@
+
+.contactrow {
+    padding: 8px 10px;
+    border-top: 1px solid;
+}
+
+.contactrow:first-child{
+    border-top: none;
+}
+
+.altrow {
+    background-color: #e0e0e0;
+}
+
+.contactrow a {
+    color: black;
+    text-decoration: none;
+}
+
+.contactrow a:hover {
+    text-decoration: underline;
+}
