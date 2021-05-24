@@ -1,6 +1,9 @@
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
+
 
 from .models import Contact
 from .forms import ContactForm
@@ -38,3 +41,12 @@ class ContactDeleteView(DeleteView):
     template_name = 'directory/delete_contact.html'
     context_object_name = 'contact'
     success_url = reverse_lazy('show-contacts')
+
+class Register(CreateView):
+    template_name = 'registration/register.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('register-success')
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponseRedirect(self.success_url)
