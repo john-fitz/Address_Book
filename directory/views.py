@@ -47,11 +47,15 @@ class AddContactView(CreateView):
         contact.save()  
         return redirect('contact-detail', pk=contact.pk)
 
-class ContactDeleteView(DeleteView):
+class ContactDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Contact
     template_name = 'directory/delete_contact.html'
     context_object_name = 'contact'
     success_url = reverse_lazy('show-contacts')
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.username == self.request.user
 
 class Register(CreateView):
     template_name = 'registration/register.html'
