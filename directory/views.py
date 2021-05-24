@@ -3,15 +3,20 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .models import Contact
 from .forms import ContactForm
 
-class ContactList(ListView):
-    model = Contact
+class ContactList(LoginRequiredMixin, ListView):
+    # model = Contact
+    login_url = reverse_lazy('login')
     context_object_name = 'all_contacts'
-    ordering = ['-last_name']
+    # ordering = ['-last_name']
+    
+    def get_queryset(self):
+        return Contact.objects.filter(username=self.request.user)
 
 class UpdateContactView(UpdateView):
     model = Contact
@@ -33,7 +38,9 @@ class AddContactView(CreateView):
     template_name = 'directory/add_contact.html'
 
     def form_valid(self, form):
-        contact = form.save()  
+        contact = form.save(commit=False)
+        contact.username = self.request.user
+        contact.save()  
         return redirect('contact-detail', pk=contact.pk)
 
 class ContactDeleteView(DeleteView):
