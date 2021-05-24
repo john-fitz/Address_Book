@@ -3,14 +3,14 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import Http404
 
 
 from .models import Contact
 from .forms import ContactForm
 
 class ContactList(LoginRequiredMixin, ListView):
-    # model = Contact
     login_url = reverse_lazy('login')
     context_object_name = 'all_contacts'
     # ordering = ['-last_name']
@@ -18,11 +18,15 @@ class ContactList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Contact.objects.filter(username=self.request.user)
 
-class UpdateContactView(UpdateView):
+class UpdateContactView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Contact
     context_object_name = 'contact'
     form_class = ContactForm
     template_name = 'directory/add_contact.html'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.username == self.request.user
 
     def form_valid(self, form):
         contact = form.save()  
