@@ -21,6 +21,7 @@ from directory.views import Register
 urlpatterns = [
     path('register/success/', TemplateView.as_view(template_name="registration/success.html"), name='register-success'),
     path('register/', Register.as_view(), name='register'),
+    path('map', include('directions.urls')),
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', include('directory.urls')),
