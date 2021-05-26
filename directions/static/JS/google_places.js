@@ -15,7 +15,7 @@ function initAutocomplete() {
    document.getElementById('id-google-address-a'),
    {
        types: ['address'],
-       componentRestrictions: {'country': ['uk']},
+       componentRestrictions: {'country': ['us']},
    })
   
   autocomplete_a.addListener('place_changed', function(){
@@ -27,7 +27,7 @@ function initAutocomplete() {
    document.getElementById('id-google-address-b'),
    {
        types: ['address'],
-       componentRestrictions: {'country': ['uk']},
+       componentRestrictions: {'country': ['us']},
    })
   
   autocomplete_b.addListener('place_changed', function(){
