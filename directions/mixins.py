@@ -2,6 +2,9 @@ import os
 import requests
 import json
 
+# pulled from the github repo: https://github.com/bobby-didcoding/did_django_google_maps_api
+# from following YouTube video: https://www.youtube.com/watch?app=desktop&v=wCn8WND-JpU
+
 
 '''
 Handles directions from Google
