@@ -4,6 +4,14 @@ $.getScript( "https://maps.googleapis.com/maps/api/js?key=" + google_api_key + "
 
 })
 
+// let map;
+
+// function initMap() {
+//   map = new google.maps.Map(document.getElementById("map-route"), {
+//     center: { lat: -34.397, lng: 150.644 },
+//     zoom: 8,
+//   });
+// }
 
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
@@ -30,7 +38,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       } else {
 
         alert('Directions request failed due to ' + status);
-        window.location.assign("/route")
+        window.location.assign("/map")
       }
     });
 }

@@ -1,4 +1,4 @@
-{% extends 'map_base.html' %}
+{% extends "directions/map_base.html" %}
 {% load static %}
 
 
@@ -8,7 +8,7 @@
 
 {% endblock %}
 
-{% block content %}
+{% block sub_content %}
 
 <h3>Django Google Maps API Demo - Routing</h3>
 
@@ -31,16 +31,12 @@
 
 {% endblock %}
 
-{% block extend_footer %}
+{% block extend_footer_sub %}
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
+        var google_api_key = "{{google_api_key|safe}}";
+    </script>
 
-    var google_api_key = "{{google_api_key|safe}}";
-
-  </script>
-
-  <script src="{% static 'google_places.js' %}"></script>
-
-
+    <script src="{% static 'js/google_places.js' %}"></script>
 {% endblock %}

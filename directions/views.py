@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import os
+from django.conf import settings
 
 # pulled from the github repo: https://github.com/bobby-didcoding/did_django_google_maps_api
 # from following YouTube video: https://www.youtube.com/watch?app=desktop&v=wCn8WND-JpU
@@ -11,8 +11,8 @@ Basic view for routing
 '''
 def route(request):
 
-	context = {"google_api_key": os.environ.get("GOOGLE_MAPS_API_KEY")}
-	return render(request, 'main/route.html', context)
+	context = {"google_api_key": settings.GOOGLE_API_KEY}
+	return render(request, 'directions/route.html', context)
 
 
 '''
@@ -32,7 +32,7 @@ def map(request):
 		)
 
 	context = {
-	"google_api_key": os.environ.get("GOOGLE_MAPS_API_KEY"),
+	"google_api_key": settings.GOOGLE_API_KEY,
 	"lat_a": lat_a,
 	"long_a": long_a,
 	"lat_b": lat_b,
