@@ -42,4 +42,4 @@ def map(request):
 	"directions": directions,
 
 	}
-	return render(request, 'main/map.html', context)
+	return render(request, 'directions/maps.html', context)
