@@ -5,7 +5,9 @@
 {% block content %}
     <div class="row">
         <div class="col-2">
-            <a class="btn btn-primary" href="{% url 'update-contact' contact.id %}" role="button">Edit Contact</a>
+            <a class="btn btn-primary" href="{% url 'show-contacts' %}" role="button">Home</a>
+            <p></p>
+            <a class="btn btn-secondary" href="{% url 'update-contact' contact.id %}" role="button">Edit Contact</a>
             <p></p>
             <a class="btn btn-danger" href="{% url 'delete-contact' contact.id %}" role="button">Delete Contact</a>
         </div>
