@@ -18,6 +18,8 @@ class ContactList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Contact.objects.filter(username=self.request.user)
 
+
+
 class UpdateContactView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Contact
     context_object_name = 'contact'

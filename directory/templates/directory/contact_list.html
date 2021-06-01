@@ -15,7 +15,11 @@
     <div class="col-6">
         {% for contact in all_contacts %}
             <div class="contactrow {% cycle '' 'altrow' %}">
-                <a href="{% url 'contact-detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a>
+                {% if contact.self_contact == False %}
+                    <a href="{% url 'contact-detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a>
+                {% else %}
+                    <a href="{% url 'contact-detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }} (My Profile)</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

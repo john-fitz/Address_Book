@@ -10,6 +10,7 @@ class Contact(models.Model):
     birthday = models.DateField('Birthday', blank=True, null=True)
     notes = models.TextField('Notes', max_length=500, blank=True) 
     username = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    self_contact = models.BooleanField(default=False)
 
     def __str__(self):
         return (self.first_name + " " + self.last_name)
