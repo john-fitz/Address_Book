@@ -10,24 +10,24 @@
 
 {% block sub_content %}
 
-<h3>Django Google Maps API Demo - Routing</h3>
+<h3>Directions</h3>
 
-    <div class="container">
-
+    <div class="form-group">
         <label for="id-google-address-a">Start Address</label>
-        <input type="text" placeholder="*Begin typing address" id="id-google-address-a" name="google_address_a">
-
-        <label for="id-google-address-b">Destination Address</label>
-        <input type="text" placeholder="*Begin typing address" id="id-google-address-b" name="google_address_b">
-
-
-        <input type="hidden" class="geo" id="id-lat-a" value="">
-        <input type="hidden" class="geo" id="id-long-a" value="">
-        <input type="hidden" class="geo" id="id-lat-b" value="">
-        <input type="hidden" class="geo" id="id-long-b" value="">
-
-
+        <input type="text" class="form-control" id="id-google-address-a" name="google_address_a" placeholder="*Begin typing address">
     </div>
+    <p></p>
+    <div class="form-group">
+        <label for="id-google-address-b">Destination Address</label>
+        <input type="text" class="form-control" id="id-google-address-b" name="google_address_b" placeholder="*Begin typing address">
+    </div>
+    <p></p>
+    <button class="btn btn-primary">Get Directions</button>
+
+    <input type="hidden" class="geo" id="id-lat-a" value="">
+    <input type="hidden" class="geo" id="id-long-a" value="">
+    <input type="hidden" class="geo" id="id-lat-b" value="">
+    <input type="hidden" class="geo" id="id-long-b" value="">
 
 {% endblock %}
 
