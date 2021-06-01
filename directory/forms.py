@@ -1,6 +1,7 @@
 from django import forms
 from .models import Contact
 from crispy_forms.helper import FormHelper
+# from address.forms import AddressField
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -20,4 +21,5 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'birthday': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
             'notes': forms.Textarea(attrs={'class': 'form-control'}),
+            # 'address': AddressField(),
         }
