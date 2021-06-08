@@ -13,12 +13,9 @@ from .forms import ContactForm
 class ContactList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     context_object_name = 'all_contacts'
-    # ordering = ['-last_name']
     
     def get_queryset(self):
-        return Contact.objects.filter(username=self.request.user)
-
-
+        return Contact.objects.filter(username=self.request.user).order_by('last_name')
 
 class UpdateContactView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Contact
