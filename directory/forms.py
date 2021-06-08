@@ -1,6 +1,7 @@
 from django import forms
 from .models import Contact
 from crispy_forms.helper import FormHelper
+from localflavor.us.forms import USZipCodeField, USStateSelect
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -15,6 +16,9 @@ class ContactForm(forms.ModelForm):
             'first_name', 'last_name', 'email', 'birthday', 'notes', 'address_line1', 'address_line2', 'address_ZIP',
             'address_state',
         )
+        # address_state = USStateSelect()
+        address_state = forms.CharField(widget=USStateSelect)
+        address_ZIP = USZipCodeField()
 
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -24,8 +28,6 @@ class ContactForm(forms.ModelForm):
             'notes': forms.Textarea(attrs={'class': 'form-control'}),
             'address_line1': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '123 Main St'}),
             'address_line2': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apartment or Suite #'}),
-            'address_ZIP': forms.NumberInput(attrs={'class': 'form-control'}),
-            'address_state': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
         labels = {
