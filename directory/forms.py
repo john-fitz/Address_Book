@@ -12,7 +12,8 @@ class ContactForm(forms.ModelForm):
         model = Contact
 
         fields = (
-            'first_name', 'last_name', 'email', 'birthday', 'notes', 
+            'first_name', 'last_name', 'email', 'birthday', 'notes', 'address_line1', 'address_line2', 'address_ZIP',
+            'address_state',
         )
 
         widgets = {
@@ -21,4 +22,8 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'birthday': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
             'notes': forms.Textarea(attrs={'class': 'form-control'}),
+            'address_line1': forms.TextInput(attrs={'class': 'form-control'}),
+            'address_line2': forms.TextInput(attrs={'class': 'form-control'}),
+            'address_ZIP': forms.TextInput(attrs={'class': 'form-control'}),
+            'address_state': forms.TextInput(attrs={'class': 'form-control'}),
         }
