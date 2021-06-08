@@ -11,10 +11,10 @@ class Contact(models.Model):
     birthday = models.DateField('Birthday', blank=True, null=True)
     notes = models.TextField('Notes', max_length=500, blank=True) 
     username = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    address_line1 = models.CharField(max_length = 50, null=True)
-    address_line2 = models.CharField(max_length = 50, null=True)
-    address_ZIP = models.CharField(max_length = 5, null=True)
-    address_state = models.CharField(max_length = 50, null=True)
+    address_line1 = models.CharField(max_length = 50, null=True, blank=True)
+    address_line2 = models.CharField(max_length = 50, null=True, blank=True)
+    address_ZIP = models.CharField(max_length = 5, null=True, blank=True)
+    address_state = models.CharField(max_length = 50, null=True, blank=True)
     self_contact = models.BooleanField(default=False)
 
     def __str__(self):
