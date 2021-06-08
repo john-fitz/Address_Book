@@ -39,14 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-<<<<<<< HEAD
-    'django.contrib.staticfiles',    
-=======
     'django.contrib.staticfiles',
     'localflavor',
->>>>>>> before-address
     'crispy_forms',
-    # 'address',
     'directory',
     'directions',
 )
