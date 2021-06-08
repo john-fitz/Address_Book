@@ -10,8 +10,9 @@ class ContactForm(forms.ModelForm):
     required_css_class = 'required'
     class Meta:
         model = Contact
+
         fields = (
-            'first_name', 'last_name', 'email', 'birthday', 'notes',
+            'first_name', 'last_name', 'email', 'birthday', 'notes', 
         )
 
         widgets = {
