@@ -9,7 +9,13 @@
             <p></p>
             <a class="btn btn-secondary" href="{% url 'update-contact' contact.id %}" role="button">Edit Contact</a>
             <p></p>
-            <a class="btn btn-danger" href="{% url 'delete-contact' contact.id %}" role="button">Delete Contact</a>
+            {% if not contact.self_contact %}
+                <a class="btn btn-danger" href="{% url 'delete-contact' contact.id %}" role="button">Delete Contact</a>
+            {% endif %}
+            <p></p>
+            {% if user_info.address_line1 != None and contact.address_line1 != None and not contact.self_contact %}
+                <a class="btn btn-dark" href="{% url 'directions:route' %}?start={{ user_info.address_line1 }}-{{ user_info.address_ZIP }}-{{ user_info.address_state }}&end={{ contact.address_line1 }}-{{ contact.address_ZIP }}-{{ contact.address_state }}" role="button">Get Directions</a>
+            {% endif %}
         </div>
 
         <div class="col-6">

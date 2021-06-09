@@ -6,12 +6,18 @@ from django.conf import settings
 
 
 from .mixins import Directions
-'''
-Basic view for routing 
-'''
-def route(request):
 
-	context = {"google_api_key": settings.GOOGLE_API_KEY}
+def address_formatter(address):
+	cleaned_address = address.split('-')
+	while 'None' in cleaned_address:
+		cleaned_address.remove('None')
+	
+	return ', '.join(cleaned_address)
+
+def route(request):
+	start_address = address_formatter(request.GET['start'])
+	end_address = address_formatter(request.GET['end'])
+	context = {"google_api_key": settings.GOOGLE_API_KEY, 'start': start_address, 'end': end_address}
 	return render(request, 'directions/route.html', context)
 
 
