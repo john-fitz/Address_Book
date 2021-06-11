@@ -8,6 +8,8 @@ from django.conf import settings
 from .mixins import Directions
 
 def address_formatter(address):
+	# cealns the addresses plassed in by URL to make it human-readable
+	
 	cleaned_address = address.split('-')
 	while 'None' in cleaned_address:
 		cleaned_address.remove('None')
