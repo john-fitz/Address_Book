@@ -1,94 +1,63 @@
-{% extends "directions/map_base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 
-
-
 {% block extra_head %}
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/maps.css' %}"></link>
-    <script src='https://www.google.com/recaptcha/api.js?render={{recaptcha_site_key}}'></script>
 
 {% endblock %}
 
 
-{% block sub_content %}
+{% block content %}
 
-<h3 id="map">Directions</h3>
+<h3>Directions</h3>
+<div class="div-container">
+  <div>
+    <input
+      id="origin-input"
+      class="controls"
+      type="text"
+      placeholder="Enter an origin location"
+      value="{{ start }}"
+    />
 
-<div class="container">
+    <input
+      id="destination-input"
+      class="controls"
+      type="text"
+      placeholder="Enter a destination location"
+      value="{{ end }}"
+    />
 
-  <table>
-    <tbody>
-      <tr>
-        <td style="padding: 2px 10px;"><b>Start</b></td>
-        <td style="padding: 2px 10px;">{{directions.origin}}</td>      
-      </tr>
-      <tr>
-        <td style="padding: 2px 10px;"><b>Destination</b></td>
-        <td style="padding: 2px 10px;">{{directions.destination}}</td>      
-      </tr>
-      <tr>
-        <td style="padding: 2px 10px;"><b>Duration</b></td>
-        <td style="padding: 2px 10px;">{{directions.duration}}</td>      
-      </tr>
-      <tr>
-        <td style="padding: 2px 10px;"><b>Distance</b></td>
-        <td style="padding: 2px 10px;">{{directions.distance}}</td>      
-      </tr>
-      <tr>
-        <td style="padding: 2px 10px;"><b>Directions</b></td>
-        <td id="dir-toggle">click <a href="javascript:void(0)" onclick="DirectionsToggle()">here</a></td>      
-      </tr>
+    <div id="mode-selector" class="controls">
+      <input
+        type="radio"
+        name="type"
+        id="changemode-walking"
+        checked="checked"
+      />
+      <label for="changemode-walking">Walking</label>
 
-    </tbody>
-  </table>
+      <input type="radio" name="type" id="changemode-transit" />
+      <label for="changemode-transit">Transit</label>
 
-  <table id="dir-table" hidden>
-    <thead>
-      <tr>
-        <th>Directions</th>
-        <th>Distance</th>
-        <th>Duration</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for dist, dur, text in directions.steps %}
-      <tr>
-        <td>{{text|safe}}</td>
-        <td>{{dist}}</td>
-        <td>{{dur}}</td>   
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      <input type="radio" name="type" id="changemode-driving" />
+      <label for="changemode-driving">Driving</label>
+    </div>
+  </div>
 
-</div>
+  <div id="map"></div>
 
-<div class="map-container">
-
-   <div id="map-route"></div>
-
-
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key={{google_api_key|safe}}&callback=initMap&libraries=places&v=weekly"
+    async
+  ></script>
 </div>
 
 {% endblock %}
 
 
-{% block extend_footer_sub %}
-    <script type="text/javascript">
-
-        var google_api_key = "{{google_api_key|safe}}";
-        var lat_a = {{lat_a|safe}};
-        var long_a = {{long_a|safe}};
-        var lat_b = {{lat_a|safe}};
-        var long_b = {{long_b|safe}};
-        var origin = "{{origin|safe}}";
-        var destination = "{{destination|safe}}";
-        var directions = {{directions|safe}}
-    
-      </script>
-    
-      <script src="{% static 'js/google_maps.js' %}"></script>
+{% block extend_footer %}    
+      <script src="{% static 'js/google_places.js' %}"></script>
 {% endblock %}
