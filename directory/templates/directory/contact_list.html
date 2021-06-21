@@ -23,6 +23,14 @@
             </div>
         {% endfor %}
     </div>
+
+    <div class="col-2" id="birthday-div">
+            <ul>
+                {% for birthday_person in birthdays %}
+                    <li><a href="{% url 'contact-detail' birthday_person.id %}">{{ birthday_person.birthday|date:"M d" }}: {{ birthday_person.first_name }} {{ birthday_person.last_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div> 
 </div>
 
 {% endblock content %}
