@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
+from datetime import timedelta, date
+from django.db.models import Q
 
 
 from .models import Contact
@@ -20,10 +22,16 @@ from .forms import ContactForm
 
 class ContactList(View, LoginRequiredMixin):
     login_url = reverse_lazy('login')
-
+    
     def get(self, request, *args, **kwargs):
+        today = date.today()
+        one_month = today + timedelta(days=30)
+
+        birthdays = Contact.objects.filter(username=self.request.user).filter(Q(birthday__month=today.month, birthday__day__gte=today.day) | Q(birthday__month=today.month+1)).filter(self_contact=False).order_by('-birthday__month').order_by('-birthday__day')[:5]
+
         all_contacts = Contact.objects.filter(username=self.request.user).order_by('last_name')
-        birthdays = Contact.objects.filter(username=self.request.user).order_by('birthday')[:5]
+        # birthdays = Contact.objects.filter(birthday__month=today.month, birthday__day__gte=today.day)#, birthday__day__lte=one_month.day)
+        # birthdays = Contact.objects.filter(username=self.request.user).order_by('birthday')[:5]
         return render(request, 'directory/contact_list.html', {'all_contacts':all_contacts, 'birthdays':birthdays})
 
 class UpdateContactView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
