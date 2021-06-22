@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static   %}
+
+{% block extra_head %}
+    <link href="{% static 'css/contact.css' %}" rel="stylesheet" />
+{% endblock %}
 
 {% block title %}Contact Detail{% endblock title %}
 
@@ -19,15 +24,30 @@
         </div>
 
         <div class="col-6">
-            <p><strong>First name &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.first_name }}</p> 
-            <p><strong>Last name &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.last_name }}</p> 
+            <h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
+            <h3>Basics</h3> 
             <p><strong>Birthday &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.birthday}}</p>
             <p><strong>Notes &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.notes}}</p> 
-            <p><strong>Address 1 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line1}}</p> 
-            <p><strong>Address 2 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line2}}</p> 
-            <p><strong>Zip Code &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_ZIP}}</p> 
-            <p><strong>State &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_state}}</p> 
+            <h3>Address</h3>
+            
+            {% if contact.address_line1 or contact.address_ZIP or contact.address_state %}
+                {% if contact.address_line1 %}
+                    <p><strong>Address 1 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line1}}</p> 
+                    <p><strong>Address 2 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line2}}</p> 
+                {% endif %}
+                
+                {% if contact.address_ZIP %}
+                    <p><strong>Zip Code &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_ZIP}}</p> 
+                {% endif %}
+                
+                {% if contact.address_state%}
+                    <p><strong>State &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_state}}</p> 
+                {% endif %}
+            {% else %}
+                <p>No address information to display!</p>
+            {% endif %}
         </div>
+
     </div>
     
 {% endblock content %}
