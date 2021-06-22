@@ -26,26 +26,25 @@
         <div class="col-6">
             <h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
             <h3>Basics</h3> 
-            <p><strong>Birthday &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.birthday}}</p>
-            <p><strong>Notes &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.notes}}</p> 
+            {% if contact.birthday %}<p><strong>Birthday &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.birthday }}</p>{% endif %}
+
             <h3>Address</h3>
             
             {% if contact.address_line1 or contact.address_ZIP or contact.address_state %}
-                {% if contact.address_line1 %}
-                    <p><strong>Address 1 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line1}}</p> 
-                    <p><strong>Address 2 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line2}}</p> 
-                {% endif %}
+                {% if contact.address_line1 %}<p><strong>Address 1 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line1 }}</p>{% endif %}
                 
-                {% if contact.address_ZIP %}
-                    <p><strong>Zip Code &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_ZIP}}</p> 
-                {% endif %}
+                {% if contact.address_line2 %}<p><strong>Address 2 &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_line2 }}</p>{% endif %}
                 
-                {% if contact.address_state%}
-                    <p><strong>State &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_state}}</p> 
-                {% endif %}
+                {% if contact.address_ZIP %}<p><strong>Zip Code &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_ZIP }}</p>{% endif %}
+                
+                {% if contact.address_state %}<p><strong>State &nbsp;&nbsp;&nbsp;&nbsp; </strong> {{ contact.address_state }}</p>{% endif %}
+            
             {% else %}
                 <p>No address information to display!</p>
             {% endif %}
+
+            <h3>General Notes</h3>
+                {{ contact.notes|linebreaks }}
         </div>
 
     </div>

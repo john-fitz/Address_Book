@@ -1,24 +1,15 @@
-from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.views import View
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import Http404
 from datetime import timedelta, date
 from django.db.models import Q
 
-
 from .models import Contact
 from .forms import ContactForm
-
-# class ContactList(LoginRequiredMixin, ListView):
-#     login_url = reverse_lazy('login')
-#     context_object_name = 'all_contacts'
-    
-#     def get_queryset(self):
-#         return Contact.objects.filter(username=self.request.user).order_by('last_name')
 
 class ContactList(View, LoginRequiredMixin):
     login_url = reverse_lazy('login')
