@@ -11,9 +11,9 @@ from django.db.models import Q
 from .models import Contact
 from .forms import ContactForm
 
-class ContactList(View, LoginRequiredMixin):
+class ContactList(LoginRequiredMixin, View):
     login_url = reverse_lazy('login')
-    
+
     def get(self, request, *args, **kwargs):
         today = date.today()
         one_month = today + timedelta(days=30)
