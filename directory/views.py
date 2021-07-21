@@ -16,8 +16,8 @@ class ContactList(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         today = date.today()
-        one_month = today + timedelta(days=30)
 
+        # people whose birthdays are coming up
         birthdays = Contact.objects.filter(username=self.request.user).filter(Q(birthday__month=today.month, birthday__day__gte=today.day) | Q(birthday__month=today.month+1)).filter(self_contact=False).order_by('-birthday__month').order_by('-birthday__day')[:5]
         all_contacts = Contact.objects.filter(username=self.request.user).order_by('last_name')
         return render(request, 'directory/contact_list.html', {'all_contacts':all_contacts, 'birthdays':birthdays})
